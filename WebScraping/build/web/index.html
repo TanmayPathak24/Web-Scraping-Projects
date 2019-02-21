@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="author" content="TANMAY PATHAK">
+        <title>Web Scraping Project</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="indexcss.css" type="text/css">
+        <!-- The style -->
+        <style>
+            body {
+                margin: 0 0;
+                padding: 0 0;
+                background-color: #d9d9d9;
+            }
+
+            center .main_heading {
+                margin-top: 3%;
+                width: 100%;
+                letter-spacing: 3px;
+                font-size: 40px;
+            }
+
+            hr {
+                width: 100%;
+                height: 2px;
+                background-color: black;
+            }
+
+            center .options {
+                margin-top: 3%;
+            }
+
+            center .options .options_button .btn {
+                height: 45px;
+                width: 5cm;
+                font-size: 16px;
+                letter-spacing: 2px;
+                border: 2px solid black;
+                border-radius: 10px;
+                margin: 0 10px;
+            }
+
+            center .main_content {
+                text-align: justify;
+                padding: 5% 5%;
+                margin: 0 0;
+                font-size: 20px;
+            }
+
+            p {
+                word-spacing: 8px;
+            }
+
+            .active_btn {
+                background-color: #1a8cff;
+                color: white;
+            }
+            .author{
+                width: 95%;
+                margin: 1% auto;
+                padding: auto auto;
+                text-align: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="author">@&nbsp;TANMAY PATHAK</div>
+    <center>
+        <h2 class="main_heading"><i>News Portal</i></h2>
+        <hr>
+        <div class="options">
+            <div class="options_button">
+                <button class="btn button_1" onclick="btn_button_1();">
+                    The Times of India
+                </button>
+                <button class="btn button_2" onclick="btn_button_2();">
+                    NDTV india
+                </button>
+            </div>
+        </div>
+
+        <div class="main_content">
+            <!-- here we fetch the content -->
+            Click on buttons to fetch data.
+        </div>
+    </center>
+
+    <script>
+        function btn_button_1() {
+            $('.main_content').html("Fetcing data");
+            $(".button_1").addClass("active_btn");
+            $(".button_2").removeClass("active_btn");
+            // Code to fetch the 
+            $.getJSON("Timesofnownews", {ajax: true}, function (data) {
+                $out = '';
+                $.each(data, function (i, item) {
+                    $out += '<h3>' + item.TITLE + '</h3><br/>' + '<p>' + item.CONTENT + '</p><br/><br/>';
+                });
+                $('.main_content').html($out);
+            });
+        }
+        function btn_button_2() {
+            $('.main_content').html("Fetcing data");
+            $(".button_2").addClass("active_btn");
+            $(".button_1").removeClass("active_btn");
+            // Code to fetch the 
+            $.getJSON("NdtvIndiaJson", {ajax: true}, function (data) {
+                $out = '';
+                $.each(data, function (i, item) {
+                    $out += '<h3>' + item.TITLE + '</h3><br/>' + '<p>' + item.CONTENT + '</p><br/><br/>';
+                });
+                $('.main_content').html($out);
+            });
+        }
+    </script>
+</body>
+
+</html>
